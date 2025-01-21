@@ -2,7 +2,6 @@
 //#include "clsUtil.h"
 //
 //int main()
-//
 //{
 //    clsUtil::Srand();
 //    cout << clsUtil::RandomNumber(1, 10) << endl;
@@ -73,7 +72,6 @@
 //    {
 //        cout << Arr4[i] << endl;
 //    }
-//
 //
 //    string Arr5[5];
 //    clsUtil::FillArrayWithRandomKeys(Arr5, 5, clsUtil::MixChars);
