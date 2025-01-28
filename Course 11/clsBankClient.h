@@ -6,17 +6,19 @@
 #include "clsPerson.h"
 #include "clsString.h"
 
+
 using namespace std;
 
-class clsBankClient : public clsPerson
+class clsBankClient : public clsPerson 
 {
 private:
 	enum enMode{EmptyMode = 0 , UpdateMode = 1 , AddNewMode = 2 };
-	
+
 	enMode _Mode;
 	string _AccountNumber;
 	string _PinCode;
 	double _AccountBalance;
+	bool _MarkedForDelete = false;
 
 	static clsBankClient _ConvertLineToClientObject(string Line,string Delim = "#//#")
 	{
@@ -76,7 +78,10 @@ private:
 		{
 			for (clsBankClient Client : vClients)
 			{
-				MyFile << _ConverClientObjectToLine(Client)<<endl;
+				if (!Client.MarkedForDelete()) 
+				{
+					MyFile << _ConverClientObjectToLine(Client)<<endl;
+				}
 			}
 		}
 
@@ -134,6 +139,11 @@ public:
 	string AccountNumber()
 	{
 		return _AccountNumber;
+	}
+
+	bool MarkedForDelete()
+	{
+		return _MarkedForDelete;
 	}
 	
 	void SetPinCode(string PinCode)
@@ -266,5 +276,28 @@ public:
 				break;
 		}
 	}
+
+	bool Delete() 
+	{
+		vector<clsBankClient> vClients = _LoadClientsDataFromFile();
+
+		bool Deleted = false;
+
+		for  (clsBankClient& Client : vClients)
+		{
+			if (Client.AccountNumber() == AccountNumber())
+			{
+				Client._MarkedForDelete = true;
+				Deleted = true;
+			}
+		}
+
+		_SaveClientsDataToFile(vClients);
+		
+		*this = _GetEmptyClientObject();
+
+		return Deleted;
+	}
+
 };
 
