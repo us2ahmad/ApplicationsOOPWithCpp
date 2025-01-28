@@ -127,7 +127,7 @@ private:
 public:
 	enum enSaveResults{ svFaildEmptyObject = 0, svSucceeded = 1 , svFaildAccountNumberExists = 2};
 
-	clsBankClient(enMode Mode, string FirstName, string LastName, string Phone, string Email, string AccountNumber, string PinCode, double AccountBalance)
+	clsBankClient(enMode Mode, string FirstName, string LastName, string Email, string Phone, string AccountNumber, string PinCode, double AccountBalance)
 		:clsPerson(FirstName, LastName, Phone,  Email)
 	{
 		_Mode = Mode;
@@ -299,5 +299,9 @@ public:
 		return Deleted;
 	}
 
+	static vector<clsBankClient> GetClientsList()
+	{
+		return _LoadClientsDataFromFile();
+	}
 };
 

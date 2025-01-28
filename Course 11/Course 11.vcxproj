@@ -140,6 +140,7 @@
     <ClCompile Include="Lesson #2 - Update Client.cpp" />
     <ClCompile Include="Lesson #3 - Add New Client.cpp" />
     <ClCompile Include="Lesson #4 - Delete Client.cpp" />
+    <ClCompile Include="Lesson #5 - List Clients.cpp" />
     <ClCompile Include="Utility Library.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -53,5 +53,8 @@
     <ClCompile Include="Lesson #4 - Delete Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Lesson #5 - List Clients.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
