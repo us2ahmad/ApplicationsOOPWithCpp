@@ -138,6 +138,7 @@
     <ClCompile Include="Input &amp; Validation Library.cpp" />
     <ClCompile Include="Lesson #01 - Find Client.cpp" />
     <ClCompile Include="Lesson #2 - Update Client.cpp" />
+    <ClCompile Include="Lesson #3 - Add New Client.cpp" />
     <ClCompile Include="Utility Library.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

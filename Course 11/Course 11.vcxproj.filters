@@ -47,5 +47,8 @@
     <ClCompile Include="Lesson #2 - Update Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Lesson #3 - Add New Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

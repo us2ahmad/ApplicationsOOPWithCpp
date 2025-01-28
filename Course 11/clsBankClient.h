@@ -11,7 +11,7 @@ using namespace std;
 class clsBankClient : public clsPerson
 {
 private:
-	enum enMode{EmptyMode = 0 , UpdateMode = 1 };
+	enum enMode{EmptyMode = 0 , UpdateMode = 1 , AddNewMode = 2 };
 	
 	enMode _Mode;
 	string _AccountNumber;
@@ -84,6 +84,20 @@ private:
 
 	}
 
+	void _AddClientLineToFile(string ClientLine) 
+	{
+		fstream MyFile;
+
+		MyFile.open("C:\\Users\\ahmad\\Desktop\\ClientData.txt", ios::out | ios::app);
+
+		if (MyFile.is_open())
+		{
+			MyFile << ClientLine << endl;
+		}
+
+		MyFile.close();
+	}
+
 	void _Update() 
 	{
 		vector<clsBankClient>  vClients = _LoadClientsDataFromFile();
@@ -99,9 +113,14 @@ private:
 
 		_SaveClientsDataToFile(vClients);
 	}
+	
+	void _AddNew() 
+	{
+		_AddClientLineToFile(_ConverClientObjectToLine(*this));
+	}
 
 public:
-	enum enSaveResults{ svFaildEmptyObject = 0, svSucceeded};
+	enum enSaveResults{ svFaildEmptyObject = 0, svSucceeded = 1 , svFaildAccountNumberExists = 2};
 
 	clsBankClient(enMode Mode, string FirstName, string LastName, string Phone, string Email, string AccountNumber, string PinCode, double AccountBalance)
 		:clsPerson(FirstName, LastName, Phone,  Email)
@@ -210,22 +229,41 @@ public:
 	{
 		return !(Find(AccountNumber).IsEmpty());
 	}
+	
+	static clsBankClient GetAddNewClientObject(string AccountNumber)
+	{
+		return  clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
+	}
 
 	enSaveResults Save() 
 	{
 
 		switch (_Mode)
 		{
-		case clsBankClient::EmptyMode:
-			return enSaveResults::svFaildEmptyObject;
-	
-		case clsBankClient::UpdateMode:
-		{
-			_Update();
-			return enSaveResults::svSucceeded;
-		}
-		default:
-			break;
+			case enMode::EmptyMode:
+			{
+				return enSaveResults::svFaildEmptyObject;
+			}
+			case enMode::UpdateMode:
+			{
+				_Update();
+				return enSaveResults::svSucceeded;
+			}
+			case enMode::AddNewMode:
+			{
+				if (IsClientExist(AccountNumber())) 
+				{
+					return enSaveResults::svFaildAccountNumberExists;
+				}
+				else
+				{
+					_AddNew();
+					_Mode = enMode::EmptyMode;
+					return enSaveResults::svSucceeded;
+				}
+			}
+			default:
+				break;
 		}
 	}
 };
