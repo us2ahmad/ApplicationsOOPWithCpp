@@ -27,12 +27,24 @@
     <ClInclude Include="clsInputValidate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clsPerson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clsBankClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility Library.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Input &amp; Validation Library.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lesson #01 - Find Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lesson #2 - Update Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

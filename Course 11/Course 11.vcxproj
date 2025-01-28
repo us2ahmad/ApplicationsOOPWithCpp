@@ -127,13 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="clsBankClient.h" />
     <ClInclude Include="clsDate.h" />
     <ClInclude Include="clsInputValidate.h" />
+    <ClInclude Include="clsPerson.h" />
     <ClInclude Include="clsString.h" />
     <ClInclude Include="clsUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Input &amp; Validation Library.cpp" />
+    <ClCompile Include="Lesson #01 - Find Client.cpp" />
+    <ClCompile Include="Lesson #2 - Update Client.cpp" />
     <ClCompile Include="Utility Library.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

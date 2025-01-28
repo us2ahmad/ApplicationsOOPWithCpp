@@ -169,5 +169,12 @@ public:
 		return clsDate::IsValidDate(Date);
 	}
 
+	static string ReadString() 
+	{
+		string Text = "";
+
+		getline(cin >> ws, Text);
+		return Text;
+	}
 };
 
