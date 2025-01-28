@@ -56,5 +56,8 @@
     <ClCompile Include="Lesson #5 - List Clients.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Lesson #6 - Total Balances.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
