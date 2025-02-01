@@ -165,7 +165,9 @@ public:
 		return _AccountBalance;
 	}
 	__declspec(property(get = GetAccountBalance, put = SetAccountBalance)) double AccountBalance;
-
+	
+	/*
+	No UI Related code iside object.
 	void Print()
 	{
 		cout << "\nClient Card:";
@@ -180,6 +182,7 @@ public:
 		cout << "\nBalance     : " << _AccountBalance;
 		cout << "\n___________________\n";
 	}
+	*/
 
 	bool IsEmpty() 
 	{

@@ -127,14 +127,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="clsAddNewClientScreen.h" />
     <ClInclude Include="clsBankClient.h" />
+    <ClInclude Include="clsClientListScreen.h" />
     <ClInclude Include="clsDate.h" />
+    <ClInclude Include="clsDeleteClientScreen.h" />
+    <ClInclude Include="clsFindClientScreen.h" />
     <ClInclude Include="clsInputValidate.h" />
+    <ClInclude Include="clsMainScreen.h" />
     <ClInclude Include="clsPerson.h" />
+    <ClInclude Include="clsScreen.h" />
     <ClInclude Include="clsString.h" />
+    <ClInclude Include="clsUpdateClientScreen.h" />
     <ClInclude Include="clsUtil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BankSystem Main Screen.cpp" />
     <ClCompile Include="Input &amp; Validation Library.cpp" />
     <ClCompile Include="Lesson #01 - Find Client.cpp" />
     <ClCompile Include="Lesson #2 - Update Client.cpp" />
