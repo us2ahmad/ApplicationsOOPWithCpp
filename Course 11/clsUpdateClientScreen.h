@@ -50,6 +50,10 @@ public:
 
     static void ShowUpdateClientScreen()
     {
+        if (!CheckAccessRights(clsUser::enPermissions::pUpdateClients))
+        {
+            return; // this will exit the function and it will not continue
+        }
         DrowHeaderScreen("\tUpdate Client Screen");
         
         cout << "\nPlease Enter client Account Number: ";

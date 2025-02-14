@@ -89,7 +89,12 @@ private:
         cout << "\nManage Users? y/n? ";
         cin >> Answer;
         if (toupper(Answer) == 'Y')
-            Permissions += clsUser::enPermissions::pManageUsers;
+            Permissions += clsUser::enPermissions::pManageUsers; 
+        
+        cout << "\LogFile ? y/n? ";
+        cin >> Answer;
+        if (toupper(Answer) == 'Y')
+            Permissions += clsUser::enPermissions::pLogFile;
 
         return Permissions;
     }

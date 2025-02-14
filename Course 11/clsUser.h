@@ -126,7 +126,7 @@ public:
     enum enPermissions
     {
         eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4,
-        pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64
+        pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64, pLogFile = 128
     };
 
     clsUser(enMode Mode, string FirstName, string LastName, string Phone, string Email , string UserName, string Password,int Permissions)
@@ -180,23 +180,26 @@ public:
 
     static clsUser Find(string UserName)
     {
-        fstream MyFile;
-        MyFile.open("C:\\Users\\ahmad\\Desktop\\UserData.txt", ios::in); //read Mode
-
-        if (MyFile.is_open())
+        if (UserName != "") 
         {
-            string Line;
-            while (getline(MyFile, Line))
-            {
-                clsUser User = _ConvertLinetoUserObject(Line);
-                if (User.UserName == UserName)
-                {
-                    MyFile.close();
-                    return User;
-                }
-            }
+            fstream MyFile;
+            MyFile.open("C:\\Users\\ahmad\\Desktop\\UserData.txt", ios::in); //read Mode
 
-            MyFile.close();
+            if (MyFile.is_open())
+            {
+                string Line;
+                while (getline(MyFile, Line))
+                {
+                    clsUser User = _ConvertLinetoUserObject(Line);
+                    if (User.UserName == UserName)
+                    {
+                        MyFile.close();
+                        return User;
+                    }
+                }
+
+                MyFile.close();
+            }
         }
 
         return _GetEmptyUserObject();
@@ -204,23 +207,26 @@ public:
 
     static clsUser Find(string UserName, string Password)
     {
-        fstream MyFile;
-        MyFile.open("C:\\Users\\ahmad\\Desktop\\UserData.txt", ios::in);//read Mode
-
-        if (MyFile.is_open())
+        if (UserName != "")
         {
-            string Line;
-            while (getline(MyFile, Line))
-            {
-                clsUser User = _ConvertLinetoUserObject(Line);
-                if (User.UserName == UserName && User.Password == Password)
-                {
-                    MyFile.close();
-                    return User;
-                }
-            }
+            fstream MyFile;
+            MyFile.open("C:\\Users\\ahmad\\Desktop\\UserData.txt", ios::in);//read Mode
 
-            MyFile.close();
+            if (MyFile.is_open())
+            {
+                string Line;
+                while (getline(MyFile, Line))
+                {
+                    clsUser User = _ConvertLinetoUserObject(Line);
+                    if (User.UserName == UserName && User.Password == Password)
+                    {
+                        MyFile.close();
+                        return User;
+                    }
+                }
+
+                MyFile.close();
+            }
         }
         return _GetEmptyUserObject();
     }
@@ -296,4 +302,11 @@ public:
         return _LoadUsersDataFromFile();
     }
 
+    bool CheckAccessPermission(enPermissions Permissions)
+    {
+        if (this->Permissions == enPermissions::eAll)
+            return true;
+
+        return (Permissions & this->Permissions) == Permissions;
+    }
 };

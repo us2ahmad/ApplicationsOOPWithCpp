@@ -10,6 +10,8 @@
 #include "clsFindClientScreen.h"
 #include "clsTransactionsScreen.h"
 #include "clsManageUsers.h"
+#include "clsLogFile.h"
+#include "clsLogFileScreen.h"
 
 using namespace std;
 
@@ -20,13 +22,13 @@ private:
     {
         eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
         eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6,
-        eManageUsers = 7, eExit = 8
+        eManageUsers = 7, eLogFile = 8 , eExit = 9
     };
 
     static short _ReadMainMenueOption()
     {
-        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 8]? ";
-        short Choice = clsInputValidate::ReadShortNumberBetween(1, 8, "Enter Number between 1 to 8? ");
+        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 9]? ";
+        short Choice = clsInputValidate::ReadShortNumberBetween(1, 9, "Enter Number between 1 to 9? ");
         return Choice;
     }
 
@@ -79,11 +81,24 @@ private:
     {
         //cout << "\nUsers Menue Will be here...\n";
         clsManageUsersScreen::ShowManageUsersMenue();
+    }    
+    
+    static void _ShowLogFileScreen()
+    {
+        //cout << "\nLogFile Screen Will be here...\n";
+        clsLogFileScreen::ShowLogFileScreen();
     }
 
-    static void _ShowEndScreen()
+    //static void _ShowEndScreen()
+    //{
+    //    cout << "\nEnd Screen Will be here...\n";
+    //}
+
+    static void _Logout() 
     {
-        cout << "\nEnd Screen Will be here...\n";
+        clsLogFile::LogFile("Logout");
+        gCurrentUser = clsUser::Find("");
+        //then it will go back to main function.
     }
 
     static void _PerfromMainMenueOption(enMainMenueOptions MainMenueOption)
@@ -131,12 +146,17 @@ private:
             system("cls");
             _ShowManageUsersMenue();
             _GoBackToMainMenue();
+            break;       
+        case enMainMenueOptions::eLogFile:
+            system("cls");
+            _ShowLogFileScreen();
+            _GoBackToMainMenue();
             break;
 
         case enMainMenueOptions::eExit:
             system("cls");
-            _ShowEndScreen();
-            //Login();
+           // _ShowEndScreen();
+            _Logout();
             break;
         }
     }
@@ -156,7 +176,8 @@ public:
         cout << setw(37) << left << "" << "\t[5] Find Client.\n";
         cout << setw(37) << left << "" << "\t[6] Transactions.\n";
         cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
-        cout << setw(37) << left << "" << "\t[8] Logout.\n";
+        cout << setw(37) << left << "" << "\t[8] Show LogFile.\n";
+        cout << setw(37) << left << "" << "\t[9] Logout.\n";
         cout << setw(37) << left << "" << "===========================================\n";
 	
         _PerfromMainMenueOption(enMainMenueOptions(_ReadMainMenueOption()));
