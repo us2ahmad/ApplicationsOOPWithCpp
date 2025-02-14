@@ -136,12 +136,12 @@ public:
 		_AccountBalance = AccountBalance;
 	}
 
-	string AccountNumber()
-	{
+	string AccountNumber() const
+	{ 
 		return _AccountNumber;
 	}
 
-	bool MarkedForDelete()
+	bool MarkedForDelete() const
 	{
 		return _MarkedForDelete;
 	}
@@ -150,7 +150,7 @@ public:
 	{
 		_PinCode = PinCode;
 	}
-	string GetPinCode()
+	string GetPinCode() const
 	{
 		return _PinCode;
 	}
@@ -160,7 +160,7 @@ public:
 	{
 		_AccountBalance = AccountBalance;
 	}
-	double GetAccountBalance()
+	double GetAccountBalance() const
 	{
 		return _AccountBalance;
 	}
@@ -292,6 +292,7 @@ public:
 			{
 				Client._MarkedForDelete = true;
 				Deleted = true;
+				break;
 			}
 		}
 
@@ -313,12 +314,29 @@ public:
 		
 		double TotalBalance = 0.0;
 
-		for (clsBankClient Client : vClients) 
+		for (const clsBankClient& Client : vClients) 
 		{
-			TotalBalance += Client.AccountBalance;
+			TotalBalance += Client.GetAccountBalance();
 		}
 
 		return TotalBalance;
+	}
+
+	void Deposit(double Amount) 
+	{
+		_AccountBalance += Amount;
+		Save();
+	}
+
+	bool Withdraw(double Amount)
+	{
+		if (_AccountBalance < Amount)
+			return false;
+		
+		_AccountBalance -= Amount;
+		Save();
+
+		return true;
 	}
 };
 

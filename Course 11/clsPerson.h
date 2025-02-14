@@ -26,7 +26,7 @@ public:
 	{
 		_FirstName = FirstName;
 	}
-	string GetFirstName() 
+	string GetFirstName() const
 	{
 		return _FirstName;
 	}
@@ -37,7 +37,7 @@ public:
 	{
 		_LastName = LastName;
 	}
-	string GetLastName()
+	string GetLastName() const
 	{
 		return _LastName;
 	}
@@ -48,28 +48,26 @@ public:
 	{
 		_Phone = Phone;
 	}
-	string GetPhone()
+	string GetPhone() const
 	{
 		return _Phone;
 	}
 	__declspec(property(get = GetPhone, put = SetPhone)) string Phone;
 
-
 	void SetEmail(string Email)
 	{
 		_Email = Email;
 	}
-	string GetEmail()
+	string GetEmail() const
 	{
 		return _Email;
 	}
 	__declspec(property(get = GetEmail, put = SetEmail)) string Email;
 
-	string FullName() 
+	string FullName() const
 	{
 		return _FirstName + " " + _LastName;
 	}
-
 
 	void Print() 
 	{
@@ -82,6 +80,5 @@ public:
 		cout << "Email     : " << _Email<< endl;
 		cout << "___________________\n";
 	}
-
 };
 
