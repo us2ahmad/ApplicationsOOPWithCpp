@@ -338,5 +338,16 @@ public:
 
 		return true;
 	}
+
+	bool Transfer(const double& Amount, clsBankClient& DestinationClient) 
+	{
+		if (this->AccountBalance < Amount)
+			return false;
+
+		this->Withdraw(Amount);
+		DestinationClient.Deposit(Amount);
+		
+		return true;
+	}
 };
 
