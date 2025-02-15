@@ -124,8 +124,70 @@ private:
 		_AddClientLineToFile(_ConverClientObjectToLine(*this));
 	}
 
+#pragma region TransferLog
+	
+	struct stTrnsferLogRecord;
+
+	static stTrnsferLogRecord _ConvertTransferLogLineToRecord(string Line, string Delim = "#//#")
+	{
+		stTrnsferLogRecord TrnsferLogRecord;
+
+		vector <string> vTrnsferLogRecordLine = clsString::Split(Line, Delim);
+		TrnsferLogRecord.DateTime = vTrnsferLogRecordLine[0];
+		TrnsferLogRecord.SourceAccountNumber = vTrnsferLogRecordLine[1];
+		TrnsferLogRecord.DestinationAccountNumber = vTrnsferLogRecordLine[2];
+		TrnsferLogRecord.Amount = stod(vTrnsferLogRecordLine[3]);
+		TrnsferLogRecord.SrcBalanceAfter = stod(vTrnsferLogRecordLine[4]);
+		TrnsferLogRecord.DestBalanceAfter = stod(vTrnsferLogRecordLine[5]);
+		TrnsferLogRecord.UserName = vTrnsferLogRecordLine[6];
+
+		return TrnsferLogRecord;
+
+	}
+	string _PrepareTransferLogRecord(float Amount, clsBankClient DestinationClient,string Delim = "#//#")
+	{
+		string TransferLogRecord = "";
+		TransferLogRecord += clsDate::GetSystemDateTimeString() + Delim;
+		TransferLogRecord += AccountNumber() + Delim;
+		TransferLogRecord += DestinationClient.AccountNumber() + Delim;
+		TransferLogRecord += to_string(Amount) + Delim;
+		TransferLogRecord += to_string(AccountBalance) + Delim;
+		TransferLogRecord += to_string(DestinationClient.AccountBalance) + Delim;
+		TransferLogRecord += gCurrentUser.UserName;
+		return TransferLogRecord;
+	}
+
+	void _RegisterTransferLog(float Amount, clsBankClient DestinationClient)
+	{
+
+		string stDataLine = _PrepareTransferLogRecord(Amount, DestinationClient);
+
+		fstream MyFile;
+		MyFile.open("C:\\Users\\ahmad\\Desktop\\TransferLog.txt", ios::out | ios::app);
+
+		if (MyFile.is_open())
+		{
+			MyFile << stDataLine << endl;
+
+			MyFile.close();
+		}
+	}
+
+#pragma endregion
 public:
-	enum enSaveResults{ svFaildEmptyObject = 0, svSucceeded = 1 , svFaildAccountNumberExists = 2};
+	enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildAccountNumberExists = 2 };
+
+	struct stTrnsferLogRecord
+	{
+		string DateTime;
+		string SourceAccountNumber;
+		string DestinationAccountNumber;
+		float Amount;
+		float SrcBalanceAfter;
+		float DestBalanceAfter;
+		string UserName;
+	};
+
 
 	clsBankClient(enMode Mode, string FirstName, string LastName, string Email, string Phone, string AccountNumber, string PinCode, double AccountBalance)
 		:clsPerson(FirstName, LastName, Phone,  Email)
@@ -346,8 +408,29 @@ public:
 
 		this->Withdraw(Amount);
 		DestinationClient.Deposit(Amount);
-		
+		_RegisterTransferLog(Amount, DestinationClient);
 		return true;
+	}
+	
+	static vector<stTrnsferLogRecord> GetTransfersLogList()
+	{
+		vector<stTrnsferLogRecord> vTransferLogRecord;
+
+		fstream MyFile;
+		MyFile.open("C:\\Users\\ahmad\\Desktop\\TransferLog.txt", ios::in);//read Mode
+
+		if (MyFile.is_open())
+		{
+			string Line;
+			while (getline(MyFile, Line))
+			{
+				vTransferLogRecord.push_back(_ConvertTransferLogLineToRecord(Line));
+			}
+
+			MyFile.close();
+		}
+	
+		return vTransferLogRecord;
 	}
 };
 

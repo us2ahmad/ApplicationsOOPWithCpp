@@ -17,13 +17,13 @@ private:
 	int	   _Permissions;
 	string _Mode;
 
-	static string _ConverLogFileDataToLine(string Mode,string Delim = "#//#")
+	static string _ConverLogFileDataToLine(string Mode,string Seperator = "#//#")
 	{
 		string Line;
-		Line += clsDate::GetSystemDateTimeString() + Delim;
-		Line += gCurrentUser.UserName + Delim;
-		Line += gCurrentUser.Password + Delim;
-		Line += to_string(gCurrentUser.Permissions) + Delim;
+		Line += clsDate::GetSystemDateTimeString() + Seperator;
+		Line += gCurrentUser.UserName + Seperator;
+		Line += gCurrentUser.Password + Seperator;
+		Line += to_string(gCurrentUser.Permissions) + Seperator;
 		Line += Mode;
 
 		return Line;
