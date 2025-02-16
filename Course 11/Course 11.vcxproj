@@ -157,6 +157,7 @@
     <ClInclude Include="clsUtil.h" />
     <ClInclude Include="clsWithdrawScreen.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="InterfaceCommunication.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BankSystem Main Screen.cpp" />

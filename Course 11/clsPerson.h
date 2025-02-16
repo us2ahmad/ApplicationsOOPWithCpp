@@ -1,9 +1,10 @@
 #pragma once
 #include <iostream>
+#include "InterfaceCommunication.h"
 
 using namespace std;
 
-class clsPerson
+class clsPerson : InterfaceCommunication
 {
 private:
 	string _FirstName;
@@ -79,6 +80,18 @@ public:
 		cout << "Phone     : " << _Phone << endl;
 		cout << "Email     : " << _Email<< endl;
 		cout << "___________________\n";
+	}
+
+	void SendEmail(string Title, string Body)  override
+	{
+	}
+	
+	void SendFax(string Title, string Body) override
+	{
+	}
+	
+	void SendSMS(string Title, string Body) override
+	{
 	}
 };
 

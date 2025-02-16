@@ -19,7 +19,7 @@ private:
         cout << "\nEmail       : " << Client.Email;
         cout << "\nPhone       : " << Client.Phone;
         cout << "\nAcc. Number : " << Client.AccountNumber();
-        cout << "\nPassword    : " << Client.PinCode;
+        cout << "\Pin Code     : " << Client.PinCode;
         cout << "\nBalance     : " << Client.AccountBalance;
         cout << "\n___________________\n";
     }
