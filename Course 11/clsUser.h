@@ -5,6 +5,7 @@
 #include <fstream>
 #include "clsPerson.h"
 #include "clsString.h"
+#include "clsUtil.h"
 
 using namespace std;
 
@@ -160,11 +161,11 @@ public:
 
     void SetPassword(string Password)
     {
-        _Password = Password;
+        _Password = clsUtil::EncryptText(Password);
     }
     string GetPassword() const
     {
-        return _Password;
+        return clsUtil::DecryptText(_Password);
     }
     __declspec(property(get = GetPassword, put = SetPassword)) string Password;
 
