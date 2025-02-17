@@ -194,7 +194,7 @@ public:
 		return (!clsCurrency::FindByCode(CurrencyCode).IsEmpty());
 	}
 
-	static vector<clsCurrency> GetCurrencysList()
+	static vector<clsCurrency> GetCurrenciesList()
 	{
 		return _LoadCurrencysDataFromFile();
 	}

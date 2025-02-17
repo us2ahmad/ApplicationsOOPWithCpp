@@ -12,6 +12,7 @@
 #include "clsManageUsers.h"
 #include "clsLogFile.h"
 #include "clsLogFileScreen.h"
+#include "clsCurrencyExchangeMainScreen.h"
 
 using namespace std;
 
@@ -22,13 +23,13 @@ private:
     {
         eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
         eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6,
-        eManageUsers = 7, eLogFile = 8 , eExit = 9
+        eManageUsers = 7, eLogFile = 8 ,eCurrencyExchange = 9, eExit = 10
     };
 
     static short _ReadMainMenueOption()
     {
-        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 9]? ";
-        short Choice = clsInputValidate::ReadShortNumberBetween(1, 9, "Enter Number between 1 to 9? ");
+        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 10]? ";
+        short Choice = clsInputValidate::ReadShortNumberBetween(1, 10, "Enter Number between 1 to 10? ");
         return Choice;
     }
 
@@ -88,6 +89,12 @@ private:
         //cout << "\nLogFile Screen Will be here...\n";
         clsLogFileScreen::ShowLogFileScreen();
     }
+      
+    static void _ShowCurrenciesMenue()
+    {
+        //cout << "\nLogFile Screen Will be here...\n";
+        clsCurrencyExchangeMainScreen::ShowCurrenciesMenue();
+    }
 
     //static void _ShowEndScreen()
     //{
@@ -105,59 +112,76 @@ private:
     {
         switch (MainMenueOption)
         {
-        case enMainMenueOptions::eListClients:
-        {
-            system("cls");
-            _ShowAllClientsScreen();
-            _GoBackToMainMenue();
-            break;
-        }
-        case enMainMenueOptions::eAddNewClient:
-            system("cls");
-            _ShowAddNewClientsScreen();
-            _GoBackToMainMenue();
-            break;
-
-        case enMainMenueOptions::eDeleteClient:
-            system("cls");
-            _ShowDeleteClientScreen();
-            _GoBackToMainMenue();
-            break;
-
-        case enMainMenueOptions::eUpdateClient:
-            system("cls");
-            _ShowUpdateClientScreen();
-            _GoBackToMainMenue();
-            break;
-
-        case enMainMenueOptions::eFindClient:
-            system("cls");
-            _ShowFindClientScreen();
-            _GoBackToMainMenue();
-            break;
-
-        case enMainMenueOptions::eShowTransactionsMenue:
-            system("cls");
-            _ShowTransactionsMenue();
-            _GoBackToMainMenue();
-            break;
-
-        case enMainMenueOptions::eManageUsers:
-            system("cls");
-            _ShowManageUsersMenue();
-            _GoBackToMainMenue();
-            break;       
-        case enMainMenueOptions::eLogFile:
-            system("cls");
-            _ShowLogFileScreen();
-            _GoBackToMainMenue();
-            break;
-
-        case enMainMenueOptions::eExit:
-            system("cls");
-           // _ShowEndScreen();
-            _Logout();
-            break;
+            case enMainMenueOptions::eListClients:
+            {
+                system("cls");
+                _ShowAllClientsScreen();
+                _GoBackToMainMenue();
+                break;
+            }
+            case enMainMenueOptions::eAddNewClient:
+            {
+                system("cls");
+                _ShowAddNewClientsScreen();
+                _GoBackToMainMenue();
+                break;
+            }
+            case enMainMenueOptions::eDeleteClient:
+            {
+                system("cls");
+                _ShowDeleteClientScreen();
+                _GoBackToMainMenue();
+                break;
+            }
+            case enMainMenueOptions::eUpdateClient:
+            {
+                system("cls");
+                _ShowUpdateClientScreen();
+                _GoBackToMainMenue();
+                break;
+            }
+            case enMainMenueOptions::eFindClient:
+            {
+                system("cls");
+                _ShowFindClientScreen();
+                _GoBackToMainMenue();
+                break;
+            }
+            case enMainMenueOptions::eShowTransactionsMenue:
+            {
+                system("cls");
+                _ShowTransactionsMenue();
+                _GoBackToMainMenue();
+                break;
+            }
+            case enMainMenueOptions::eManageUsers:
+            {
+                system("cls");
+                _ShowManageUsersMenue();
+                _GoBackToMainMenue();
+                break;
+            }
+            case enMainMenueOptions::eLogFile:
+            {
+                system("cls");
+                _ShowLogFileScreen();
+                _GoBackToMainMenue();
+                break;
+            }     
+            case enMainMenueOptions::eCurrencyExchange:
+            {
+                system("cls");
+                _ShowCurrenciesMenue();
+                _GoBackToMainMenue();
+                break;
+            }
+            case enMainMenueOptions::eExit:
+            {
+                system("cls");
+               // _ShowEndScreen();
+                _Logout();
+                break;
+            }
         }
     }
 
@@ -177,7 +201,8 @@ public:
         cout << setw(37) << left << "" << "\t[6] Transactions.\n";
         cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
         cout << setw(37) << left << "" << "\t[8] Show LogFile.\n";
-        cout << setw(37) << left << "" << "\t[9] Logout.\n";
+        cout << setw(37) << left << "" << "\t[9] Currency Exchange.\n";
+        cout << setw(37) << left << "" << "\t[10] Logout.\n";
         cout << setw(37) << left << "" << "===========================================\n";
 	
         _PerfromMainMenueOption(enMainMenueOptions(_ReadMainMenueOption()));
