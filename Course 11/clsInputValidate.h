@@ -9,7 +9,7 @@ class clsInputValidate
 {
 public:
 
-	static bool IsNumberBetween( short Number,short From, short To)
+	static bool IsNumberBetween(short Number,short From, short To)
 	{
 		if (From > To)
 			clsUtil::Swap(From, To);
