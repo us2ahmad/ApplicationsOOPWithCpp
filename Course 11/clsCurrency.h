@@ -150,6 +150,11 @@ public:
 		return _LastUpdateRate;
 	}
 
+	bool operator==(const clsCurrency& other) const
+	{
+		return clsString::UpperAllString(_CurrencyCode) == clsString::UpperAllString(other.CurrencyCode());
+	}
+
 	static clsCurrency FindByCountry(string Country)
 	{
 		vector<clsCurrency> vCurrencys = _LoadCurrencysDataFromFile();
@@ -197,6 +202,16 @@ public:
 	static vector<clsCurrency> GetCurrenciesList()
 	{
 		return _LoadCurrencysDataFromFile();
+	}
+
+	float ConvertToUSD(float Amount) 
+	{
+		return float(Amount / Rate());
+	}
+
+	float ConvertToOtherCurrency(float Amount, clsCurrency Currency2)
+	{
+		return	Currency2.CurrencyCode() == "USD" ? ConvertToUSD(Amount) : (float)(ConvertToUSD(Amount) * Currency2.Rate());
 	}
 };
 
