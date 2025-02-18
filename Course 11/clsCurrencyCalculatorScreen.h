@@ -4,8 +4,6 @@
 #include "clsCurrency.h"
 #include "clsString.h"
 
-
-
 class clsCurrencyCalculatorScreen : clsScreen
 {
 private:
