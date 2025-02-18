@@ -9,38 +9,14 @@ class clsInputValidate
 {
 public:
 
-	static bool IsNumberBetween(short Number,short From, short To)
+	template <typename T>
+	static bool IsNumberBetween(T Number, T From, T To)
 	{
 		if (From > To)
 			clsUtil::Swap(From, To);
 
-		return (From <= Number && To >= Number);
+		return (From <= Number && Number <= To);
 	}
-
-	static bool IsNumberBetween(int Number,int From, int To)
-	{
-		if (From > To)
-			clsUtil::Swap(From, To);
-
-		return (From <= Number && To >= Number);
-	}
-
-	static bool IsNumberBetween(float Number,float From, float To)
-	{
-		if (From > To)
-			clsUtil::Swap(From, To);
-
-		return (From <= Number && To >= Number);
-	}
-
-	static bool IsNumberBetween( double Number,double From, double To)
-	{
-		if (From > To)
-			clsUtil::Swap(From, To);
-
-		return (From <= Number && To >= Number);
-	}
-
 	static bool IsDateBetween(clsDate Date, clsDate FromDate, clsDate ToDate)
 	{
 		if (!clsDate::IsValidDate(Date) || !clsDate::IsValidDate(FromDate) || !clsDate::IsValidDate(ToDate))
